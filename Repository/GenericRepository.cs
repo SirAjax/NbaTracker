@@ -20,6 +20,23 @@ namespace NbaTracker.Repository
             return retVal;
         }
 
+        public async Task<GenericResponse<T>> SaveItemAsync(T item)
+        {
+            var retVal = new GenericResponse<T>();
+            try
+            {
+                repositoryContext.ChangeTracker.Clear();
+                await repositoryContext.AddAsync(item);
+                await repositoryContext.SaveChangesAsync();
+                retVal.Value = item;
+            }
+            catch (Exception ex)
+            {
+                await retVal.SetExceptionAsync(ex);
+            }
+            return retVal;
+        }
+
         public async Task<GenericResponse<List<T>>> SaveListAsync(List<T> data)
         {
             var retVal = new GenericResponse<List<T>>();

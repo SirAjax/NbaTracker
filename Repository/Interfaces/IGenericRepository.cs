@@ -6,5 +6,6 @@ namespace NbaTracker.Repository.Interfaces
     {
         Task<GenericResponse<List<T>>> GetAllAsync();
         Task<GenericResponse<List<T>>> SaveListAsync(List<T> data);
+        Task<GenericResponse<T>> SaveItemAsync(T item);
     }
 }
