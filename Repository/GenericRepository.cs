@@ -11,8 +11,7 @@ namespace NbaTracker.Repository
             var retVal = new GenericResponse<List<T>>();
             try
             {
-                retVal.Value = await repositoryContext.Set<T>().ToListAsync();
-                //Create the Fatal response here
+                retVal.Value = await repositoryContext.Set<T>().AsNoTracking().ToListAsync();
             }
             catch (Exception ex)
             {

@@ -7,7 +7,7 @@ public static class ExceptionAssitance
         var innerException = exception;
         do
         {
-            yield return exception;
+            yield return innerException;
             innerException = innerException.InnerException;
         }
         while (innerException != null);

@@ -22,7 +22,6 @@
         public void SetException(Exception? ex = null, string msg = "")
         {
             Error = true;
-            ResponseErrorMessage = msg;
 
             if (ex != null)
             {
