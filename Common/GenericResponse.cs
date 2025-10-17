@@ -22,24 +22,24 @@
         public void SetException(Exception? ex = null, string msg = "")
         {
             Error = true;
+            ResponseErrorMessage = msg;
 
             if (ex != null)
             {
                 ResponseException = ex;
+                ResponseErrorMessages!.AddRange(ex.GetAllExceptions().Select(x => x.Message).ToList());
 
-                if (!string.IsNullOrEmpty(msg))
+                if (string.IsNullOrEmpty(ResponseErrorMessage))
                 {
-                    ResponseErrorMessage = ex.Message;
-
-                    if (string.IsNullOrWhiteSpace(msg))
-                    {
-                        ResponseErrorMessage = msg;
-                    }
+                    ResponseErrorMessage = string.IsNullOrWhiteSpace(ex.Message) ? ex.Message : msg;
                 }
                 else
                 {
-                    ResponseErrorMessage = msg;
-                    ResponseErrorMessages.Add(msg);
+                    if (!string.IsNullOrWhiteSpace(msg))
+                    {
+                        ResponseErrorMessage = msg;
+                        ResponseErrorMessages.Add(msg);
+                    }
                 }
             }
         }
