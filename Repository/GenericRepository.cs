@@ -53,5 +53,22 @@ namespace NbaTracker.Repository
             }
             return retVal;
         }
+
+        public async Task<GenericResponse<bool>> DeleteItemAsync(T item)
+        {
+            var retVal = new GenericResponse<bool>();
+            try
+            {
+                repositoryContext.ChangeTracker.Clear();
+                repositoryContext.Remove(item);
+                await repositoryContext.SaveChangesAsync();
+                retVal.Value = true;
+            }
+            catch(Exception ex)
+            {
+                await retVal.SetExceptionAsync(ex);
+            }
+            return retVal;
+        }
     }
 }

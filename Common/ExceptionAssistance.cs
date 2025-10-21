@@ -1,6 +1,6 @@
 ﻿namespace NbaTracker.Common;
 
-public static class ExceptionAssitance
+public static class ExceptionAssistance
 {
     public static IEnumerable<Exception> GetAllExceptions(this Exception exception)
     {

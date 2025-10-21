@@ -22,10 +22,10 @@
         public void SetException(Exception? ex = null, string msg = "")
         {
             Error = true;
+            ResponseException = ex;
 
             if (ex != null)
             {
-                ResponseException = ex;
                 ResponseErrorMessages!.AddRange(ex.GetAllExceptions().Select(x => x.Message).ToList());
 
                 if (string.IsNullOrEmpty(ResponseErrorMessage))

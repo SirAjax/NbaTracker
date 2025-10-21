@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using NbaTracker.Components;
 using NbaTracker.Repository;
+using NbaTracker.Repository.ModelRepositories;
+using NbaTracker.Repository.ModelRepositories.Interfaces;
+using NbaTracker.Services.DataServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,12 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddTransient<IPlayerRepository, PlayerRepository>();
+
+builder.Services.AddTransient<IPlayerDataService, PlayerDataService>();
+
+
 
 var app = builder.Build();
 
